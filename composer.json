@@ -25,7 +25,7 @@
   "minimum-stability": "master",
   "autoload": {
     "psr-4": {
-      "Mindertech\\Dysms": "src/Mindertech/Dysms"
+      "Mindertech\\Dysms\\": "src/Mindertech/Dysms"
     }
   }
 }
