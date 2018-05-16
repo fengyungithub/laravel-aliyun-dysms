@@ -20,7 +20,7 @@ class SendSmsRequest {
     }
 
 
-    public function send($templateId, $sendTo, array $params = [], array $config = [], $outId = null, $extendCode = null, $protocol = null) : bool {
+    public function to($templateId, $sendTo, array $params = [], array $config = [], $outId = null, $extendCode = null, $protocol = null) : bool {
 
         $client = new AcsClient($config);
         $request = new AliSendSmsRequest();

@@ -24,6 +24,9 @@
   },
   "minimum-stability": "dev",
   "autoload": {
+    "classmap": [
+      "src/Mindertech/Dysms/lib"
+    ],
     "psr-4": {
       "Mindertech\\Dysms\\": "src/Mindertech/Dysms"
     }
