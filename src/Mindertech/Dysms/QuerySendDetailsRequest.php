@@ -60,6 +60,10 @@ class QuerySendDetailsRequest {
 
         $acsResponse = $client->getAcsClient()->getAcsResponse($request);
 
+        if(config('dysms.log')) {
+            \Log::info(print_r($acsResponse, true));
+        }
+
         $status = isset($acsResponse->Code) ? $acsResponse->Code : 'ERROR';
 
         $default = [

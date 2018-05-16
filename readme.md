@@ -83,6 +83,33 @@ response
 }
 ```
 
+3. send batch sms
+
+```php 
+    try {
+        $bizId = SendSmsBatch::to(
+                    'SMS_123456', 
+                    [
+                        '18688886666',
+                        '18666666666'
+                    ], 
+                    [
+                        'sign-1', 'sign-2'
+                    ],
+                    [
+                        [
+                            'code' => mt_rand(1000, 9999)
+                        ],
+                        [
+                            'code' => mt_rand(1000, 9999)
+                        ]
+                    ]
+                );
+    } catch (\Exception $e) {
+        echo $e->getMessage();
+    }
+```
+
 ## Todo
 
 * Send Batch
