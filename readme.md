@@ -24,6 +24,8 @@
     ```php
     'SendSms' => Mindertech\Dysms\Facades\SendSmsFacade::class,
     'QuerySms' => Mindertech\Dysms\Facades\QuerySendDetailsFacade::class,
+    'SendSmsBatch' => Mindertech\Dysms\Facades\SendSmsBatchFacade::class,
+    'SmsQueue' => Mindertech\Dysms\Facades\SmsQueueFacade::class,
     ```
 
 4. Run the command below to publish the package config file `config/dysms.php`:
@@ -35,6 +37,30 @@
 ## Configuration
 
 Set the property values in the `config/dysms.php`.
+
+default
+```php
+return [
+    'access_key_id' => '',
+    'access_key_secret' => '',
+    'sign' => '',
+    'log' => false,
+    'sms-report-queue' => '',
+    'sms-up-queue' => '',
+
+    //以下配置暂时无需替换
+    'product' => 'Dysmsapi',
+    'domain' => 'dysmsapi.aliyuncs.com',
+    'region' => 'cn-hangzhou',
+    'end_point_name' => 'cn-hangzhou',
+    'mns' => [
+        'account_id' => '1943695596114318',
+        'product' => 'Dybaseapi',
+        'domain' => 'dybaseapi.aliyuncs.com'
+    ],
+];
+```
+
 
 
 ## Usage
