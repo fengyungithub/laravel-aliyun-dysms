@@ -35,15 +35,15 @@ class TokenGetterForAlicom
         Config::load();
         $endpointName = $config['end_point_name'];
         $regionId = $config['region'];
-        $productName = $config['product'];
-        $domain = $config['domain'];
+        $productName = $config['mns']['product'];
+        $domain = $config['mns']['domain'];
 
         $this->tokenMap = [];
         $this->bufferTime = 2 * 60;
         DefaultProfile::addEndpoint($endpointName, $regionId, $productName, $domain);
         $profile = DefaultProfile::getProfile($regionId, $config['access_key_id'], $config['access_key_secret']);
         $this->acsClient = new DefaultAcsClient($profile);
-        $this->mnsAccountEndpoint = $this->getAccountEndpoint($config['account_id'], $regionId);
+        $this->mnsAccountEndpoint = $this->getAccountEndpoint($config['mns']['account_id'], $regionId);
     }
 
 
