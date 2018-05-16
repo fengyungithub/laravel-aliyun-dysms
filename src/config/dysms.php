@@ -9,6 +9,7 @@ return [
     'access_key_id' => '',
     'access_key_secret' => '',
     'sign' => '',
+    'log' => false,
 
     //以下配置暂时无需替换
     'product' => 'Dysmsapi',

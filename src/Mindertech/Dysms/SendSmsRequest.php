@@ -10,17 +10,38 @@ namespace Mindertech\Dysms;
 use Aliyun\Api\Sms\Request\V20170525\SendSmsRequest as AliSendSmsRequest;
 use Mindertech\Dysms\AcsClient;
 
+/**
+ * Class SendSmsRequest
+ * @package Mindertech\Dysms
+ */
 class SendSmsRequest {
 
+    /**
+     * @var
+     */
     public $app;
 
+    /**
+     * SendSmsRequest constructor.
+     * @param $app
+     */
     public function __construct($app)
     {
         $this->app = $app;
     }
 
-
-    public function to($templateId, $sendTo, array $params = [], array $config = [], $outId = null, $extendCode = null, $protocol = null) : bool {
+    /**
+     * @param $templateId
+     * @param $sendTo
+     * @param array $params
+     * @param array $config
+     * @param null $outId
+     * @param null $extendCode
+     * @param null $protocol
+     * @return bool|\SimpleXMLElement|string
+     * @throws \Exception
+     */
+    public function to($templateId, $sendTo, array $params = [], array $config = [], $outId = null, $extendCode = null, $protocol = null) {
 
         $client = new AcsClient($config);
         $request = new AliSendSmsRequest();
@@ -41,11 +62,24 @@ class SendSmsRequest {
             $request->setSmsUpExtendCode($extendCode);
         }
 
-        $acsResponse = $client->getAcsResponse($request);
+        $acsResponse = $client->getAcsClient()->getAcsResponse($request);
 
-        $status = array_get($acsResponse, 'code');
+        /**
+         * {"Message": "OK", "RequestId":"AC7CC92E-B0A0-4AB1-83DC-A42FBF757607", "BizId":"999612626451607776^0","Code": "OK"}
+         */
 
-        return strtolower($status) === 'ok' ? true : $acsResponse;
+        if(config('dysms.log')) {
+            \Log::info(print_r($acsResponse, true));
+        }
+
+        $status = isset($acsResponse->Code) ? $acsResponse->Code : 'ERROR';
+        $bizId = isset($acsResponse->BizId) ? $acsResponse->BizId : '';
+
+        if(strtolower($status) !== 'ok') {
+            throw new \Exception($acsResponse->Code);
+        }
+
+        return $bizId;
 
     }
 }
