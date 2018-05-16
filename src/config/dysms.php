@@ -11,7 +11,11 @@ return [
     'sign' => '',
     'log' => false,
 
+    'sms-report-queue' => '',
+    'sms-up-queue' => '',
+
     //以下配置暂时无需替换
+    'account_id' => '1943695596114318',
     'product' => 'Dysmsapi',
     'domain' => 'dysmsapi.aliyuncs.com',
     'region' => 'cn-hangzhou',
