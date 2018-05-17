@@ -37,7 +37,6 @@ class SendSmsRequest {
      * @param $templateId
      * @param $sendTo
      * @param array $params
-     * @param array $config
      * @param null $outId
      * @param null $extendCode
      * @param null $protocol

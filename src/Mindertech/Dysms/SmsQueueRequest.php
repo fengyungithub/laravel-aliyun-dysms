@@ -46,6 +46,14 @@ class SmsQueueRequest
     public function __construct($app)
     {
         $this->app = $app;
+        $this->mergeConfig();
+    }
+
+    /**
+     *
+     */
+    private function mergeConfig()
+    {
         $this->config = array_merge(config('dysms'), $this->getRuntimeConfig());
     }
 
@@ -54,7 +62,6 @@ class SmsQueueRequest
      */
     private function getTokenGetter()
     {
-
         $this->tokenGetter = new TokenGetterForAlicom($this->config);
 
         return $this->tokenGetter;
@@ -66,6 +73,7 @@ class SmsQueueRequest
      */
     public function up(callable $callback)
     {
+        $this->mergeConfig();
         $this->receiveMessage('SmsUp', $this->config['sms-up-queue'], $callback);
     }
 
@@ -75,6 +83,7 @@ class SmsQueueRequest
      */
     public function report(callable $callback)
     {
+        $this->mergeConfig();
         $this->receiveMessage('SmsReport', $this->config['sms-report-queue'], $callback);
     }
 

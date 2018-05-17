@@ -17,7 +17,7 @@ trait RuntimeConfig
     /**
      * @var
      */
-    private $runtimeConfig;
+    private $runtimeConfig = [];
 
 
     /**

@@ -35,7 +35,6 @@ class QuerySendDetailsRequest {
     /**
      * @param $phoneNumber
      * @param $sendDate
-     * @param array $config
      * @param int $page
      * @param int $pageSize
      * @param null $bizId

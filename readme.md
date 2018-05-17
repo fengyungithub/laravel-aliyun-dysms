@@ -81,11 +81,10 @@ return [
 2. query sms 
 
     ```php 
-    $config = [];
     $page = 1;
     $pageSize = 1;
     $bizId = null;
-    $result = QuerySms::search('18688886666', '20180516', $config, $page, $pageSize, $bizId);
+    $result = QuerySms::search('18688886666', '20180516', $page, $pageSize, $bizId);
     ```
 
     response
@@ -189,6 +188,21 @@ return [
     
         return true;
     });
+    ```
+
+5. set config at runtime
+
+    ```php 
+        try {
+            $bizId = SendSms::setRuntimeConfig([
+                'access_key_id' => 'id',
+                'access_key_secret' => 'key'
+            ])->to('SMS_123456', '18688886666', [
+                'code' => mt_rand(1000, 9999)
+            ]);
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+        }
     ```
 
 ## Todo
