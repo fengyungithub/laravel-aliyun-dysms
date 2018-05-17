@@ -9,12 +9,15 @@ namespace Mindertech\Dysms;
 
 use Aliyun\Api\Sms\Request\V20170525\SendSmsRequest as AliSendSmsRequest;
 use Mindertech\Dysms\AcsClient;
+use Mindertech\Dysms\Traits\RuntimeConfig;
 
 /**
  * Class SendSmsRequest
  * @package Mindertech\Dysms
  */
 class SendSmsRequest {
+
+    use RuntimeConfig;
 
     /**
      * @var
@@ -41,9 +44,9 @@ class SendSmsRequest {
      * @return bool|\SimpleXMLElement|string
      * @throws \Exception
      */
-    public function to($templateId, $sendTo, array $params = [], array $config = [], $outId = null, $extendCode = null, $protocol = null) {
+    public function to($templateId, $sendTo, array $params = [], $outId = null, $extendCode = null, $protocol = null) {
 
-        $client = new AcsClient($config);
+        $client = new AcsClient($this->getRuntimeConfig());
         $request = new AliSendSmsRequest();
         $config = $client->getConfig();
 

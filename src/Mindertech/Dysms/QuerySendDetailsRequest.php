@@ -8,6 +8,7 @@
 namespace Mindertech\Dysms;
 
 use Aliyun\Api\Sms\Request\V20170525\QuerySendDetailsRequest as AliyunQuerySendDetailsRequest;
+use Mindertech\Dysms\Traits\RuntimeConfig;
 
 /**
  * Class QuerySendDetailsRequest
@@ -15,6 +16,7 @@ use Aliyun\Api\Sms\Request\V20170525\QuerySendDetailsRequest as AliyunQuerySendD
  */
 class QuerySendDetailsRequest {
 
+    use RuntimeConfig;
     /**
      * @var
      */
@@ -40,9 +42,9 @@ class QuerySendDetailsRequest {
      * @param null $protocol
      * @return array
      */
-    public function search($phoneNumber, $sendDate, array $config = [], $page = 1, $pageSize = 10, $bizId = null, $protocol = null)
+    public function search($phoneNumber, $sendDate, $page = 1, $pageSize = 10, $bizId = null, $protocol = null)
     {
-        $client = new AcsClient($config);
+        $client = new AcsClient($this->getRuntimeConfig());
         $config = $client->getConfig();
 
         $request = new AliyunQuerySendDetailsRequest();

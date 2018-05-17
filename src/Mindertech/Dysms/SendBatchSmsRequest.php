@@ -8,6 +8,7 @@
 namespace Mindertech\Dysms;
 
 use Aliyun\Api\Sms\Request\V20170525\SendBatchSmsRequest as AliyunSendBatchSmsRequest;
+use Mindertech\Dysms\Traits\RuntimeConfig;
 
 /**
  * Class SendBatchSmsRequest
@@ -15,6 +16,7 @@ use Aliyun\Api\Sms\Request\V20170525\SendBatchSmsRequest as AliyunSendBatchSmsRe
  */
 class SendBatchSmsRequest {
 
+    use RuntimeConfig;
     /**
      * @var
      */
@@ -43,7 +45,7 @@ class SendBatchSmsRequest {
     public function to($templateId, array $phoneNumbers, array $sign, array $params = [], array $extendCodes = null, $protocol = null)
     {
 
-        $client = new AcsClient();
+        $client = new AcsClient($this->getRuntimeConfig());
 
         $request = new AliyunSendBatchSmsRequest();
         $request->setPhoneNumberJson(json_encode($phoneNumbers, JSON_UNESCAPED_UNICODE));

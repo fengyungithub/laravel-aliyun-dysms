@@ -4,6 +4,7 @@
  * Date: 2018-05-16 10:35
  * @author: GROOT (pzyme@outlook.com)
  */
+
 namespace Mindertech\Dysms;
 
 use AliyunMNS\Lib\TokenGetterForAlicom;
@@ -11,19 +12,46 @@ use AliyunMNS\Lib\TokenForAlicom;
 use Aliyun\Core\Config;
 use AliyunMNS\Exception\MnsException;
 use AliyunMNS\Requests\BatchReceiveMessageRequest;
+use Mindertech\Dysms\Traits\RuntimeConfig;
 
-class SmsQueueRequest {
+/**
+ * Class SmsQueueRequest
+ * @package Mindertech\Dysms
+ */
+class SmsQueueRequest
+{
 
+    /**
+     *
+     */
+    use RuntimeConfig;
+
+    /**
+     * @var null
+     */
     private $tokenGetter = null;
+    /**
+     * @var array
+     */
     private $config = [];
+    /**
+     * @var
+     */
     public $app;
 
+    /**
+     * SmsQueueRequest constructor.
+     * @param $app
+     */
     public function __construct($app)
     {
         $this->app = $app;
-        $this->config = config('dysms');
+        $this->config = array_merge(config('dysms'), $this->getRuntimeConfig());
     }
 
+    /**
+     * @return TokenGetterForAlicom|null
+     */
     private function getTokenGetter()
     {
 
@@ -61,10 +89,8 @@ class SmsQueueRequest {
     {
         $i = 0;
         // 取回执消息失败3次则停止循环拉取
-        while ( $i < 3)
-        {
-            try
-            {
+        while ($i < 3) {
+            try {
                 // 取临时token
                 $tokenForAlicom = $this->getTokenGetter()->getTokenByMessageType($messageType, $queueName);
 
@@ -79,11 +105,9 @@ class SmsQueueRequest {
                 $bodyMD5 = strtoupper(md5(base64_encode($message->getMessageBody())));
 
                 // 比对摘要，防止消息被截断或发生错误
-                if ($bodyMD5 == $message->getMessageBodyMD5())
-                {
+                if ($bodyMD5 == $message->getMessageBodyMD5()) {
                     // 执行回调
-                    if(call_user_func($callback, json_decode($message->getMessageBody())))
-                    {
+                    if (call_user_func($callback, json_decode($message->getMessageBody()))) {
                         // 当回调返回真值时，删除已接收的信息
                         $receiptHandle = $message->getReceiptHandle();
                         $queue->deleteMessage($receiptHandle);
@@ -117,11 +141,9 @@ class SmsQueueRequest {
                 // ------------------------------------------------------------------
 
                 return; // 整个取回执消息流程完成后退出
-            }
-            catch (MnsException $e)
-            {
+            } catch (MnsException $e) {
                 $i++;
-                if($this->config['log']) {
+                if ($this->config['log']) {
                     \Log::info("ex:{$e->getMnsErrorCode()}");
                     \Log::info("ReceiveMessage Failed: {$e}");
                 }

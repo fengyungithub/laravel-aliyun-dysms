@@ -11,13 +11,24 @@ use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;
 use Aliyun\Core\DefaultAcsClient;
 
+/**
+ * Class AcsClient
+ * @package Mindertech\Dysms
+ */
 class AcsClient
 {
 
+    /**
+     * @var array
+     */
     private $config = [];
 
 
-    public function __construct($config = [])
+    /**
+     * AcsClient constructor.
+     * @param array $config
+     */
+    public function __construct(array $config = [])
     {
         $defaultConfig = config('dysms');
 
@@ -45,6 +56,9 @@ class AcsClient
         return new DefaultAcsClient($profile);
     }
 
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return $this->config;
