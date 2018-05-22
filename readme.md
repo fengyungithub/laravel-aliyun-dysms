@@ -56,7 +56,8 @@ return [
     'mns' => [
         'account_id' => '1943695596114318',
         'product' => 'Dybaseapi',
-        'domain' => 'dybaseapi.aliyuncs.com'
+        'domain' => 'dybaseapi.aliyuncs.com',
+        'wait_seconds' => 3
     ],
 ];
 ```
@@ -207,4 +208,3 @@ return [
 
 ## Todo
 
-* MNS batch receive message
