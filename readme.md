@@ -12,23 +12,7 @@
     composer require pgroot/laravel-aliyun-dysms
     ```
 
-2. Open your `config/app.php` and add the following to the `providers` array:
-
-    ```php
-    Mindertech\Dysms\MindertechDysmsServiceProvider::class
-    ```
-
-
-3. In the same `config/app.php` and add the following to the `aliases ` array: 
-
-    ```php
-    'SendSms' => Mindertech\Dysms\Facades\SendSmsFacade::class,
-    'QuerySms' => Mindertech\Dysms\Facades\QuerySendDetailsFacade::class,
-    'SendSmsBatch' => Mindertech\Dysms\Facades\SendSmsBatchFacade::class,
-    'SmsQueue' => Mindertech\Dysms\Facades\SmsQueueFacade::class,
-    ```
-
-4. Run the command below to publish the package config file `config/dysms.php`:
+2. Run the command below to publish the package config file `config/dysms.php`:
 
     ```shell
     php artisan vendor:publish --provider=Mindertech\Dysms\MindertechDysmsServiceProvider
