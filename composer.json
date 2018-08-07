@@ -1,5 +1,5 @@
 {
-  "name": "pgroot/laravel-aliyun-dysms",
+  "name": "fengyun/laravel-aliyun-dysms",
   "description": "Aliyun SMS PHP SDK for Laravel",
   "keywords": [
     "aliyun",
@@ -17,13 +17,13 @@
     }
   ],
   "require": {
-    "php": ">=7.1.13",
-    "laravel/framework": ">=5.5.5"
+    "php": ">=5.5.9",
+    "laravel/framework": ">=5.1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0"
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "autoload": {
     "classmap": [
       "src/Mindertech/Dysms/lib/dysms-sdk"
